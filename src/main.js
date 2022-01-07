@@ -6,7 +6,11 @@ import useLocalStorage from "./useLocalStorate";
 import reducer from "./reducer";
 
 const Main = () => {
-  const [storedComments, setStoredComments] = useLocalStorage("comments", []);
+  const [storedComments, setStoredComments] = useLocalStorage(
+    "comments",
+    [],
+    (data) => data.length
+  );
   const [comments, dispatch] = useReducer(reducer, storedComments);
 
   useEffect(() => {
