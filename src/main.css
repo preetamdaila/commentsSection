@@ -1,0 +1,141 @@
+.mainContainer {
+  margin: 2rem;
+  padding: 1rem;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.commentBox {
+  width: 100%;
+  line-height: 2rem;
+  min-height: 40px;
+}
+
+.commentsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comments {
+  display: flex;
+  gap: 1rem;
+}
+
+.userImage {
+  width: 50px;
+  height: 50px;
+  background-color: grey;
+}
+
+.commentsSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.commentHeading {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.userName {
+  color: skyblue;
+  font-weight: bold;
+}
+
+.commentTime {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.lastEdit {
+  display: flex;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #857;
+  cursor: default;
+}
+
+.lastEditTime {
+  display: none;
+  margin: 0 0.25rem;
+}
+
+.lastEdit:hover .lastEditTime {
+  display: block;
+}
+
+.commentText {
+  text-align: left;
+}
+
+.commentFooter {
+  display: flex;
+  gap: 2rem;
+}
+
+.footerActions {
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 100ms ease-in-out;
+  user-select: none;
+}
+
+.footerActions:hover {
+  color: white;
+}
+
+.footerIcon {
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+}
+
+.footerActions:hover .footerIcon {
+  background-color: white;
+}
+
+.replay {
+  color: #555;
+}
+
+.replay:hover {
+  background-color: #555;
+}
+
+.replayIcon {
+  background-color: #555;
+}
+
+.delete {
+  color: #843;
+}
+
+.delete:hover {
+  background-color: #843;
+}
+
+.deleteIcon {
+  background-color: #843;
+}
+
+.edit {
+  color: #25491e;
+}
+
+.edit:hover {
+  background-color: #25491e;
+}
+
+.editIcon {
+  background-color: #25491e;
+}
