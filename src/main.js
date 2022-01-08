@@ -4,6 +4,7 @@ import Comments from "./comments";
 import CommentBox from "./commentBox";
 import useLocalStorage from "./useLocalStorate";
 import reducer from "./reducer";
+import UserSelector from "./userSelector";
 
 const Main = () => {
   const [storedComments, setStoredComments] = useLocalStorage(
@@ -15,10 +16,11 @@ const Main = () => {
 
   useEffect(() => {
     setStoredComments("comments", comments);
-  }, [comments]);
+  }, [comments, setStoredComments]);
 
   return (
     <div className="mainContainer">
+      <UserSelector />
       <CommentBox text={""} dispatch={dispatch} action={{ type: "ADD" }} />
       <Comments comments={comments} dispatch={dispatch} />
     </div>
