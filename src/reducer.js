@@ -1,8 +1,8 @@
 import getCurrentDateTime from "./getCurrentDateTime";
 
-const createComment = (name, text) => {
+const createComment = (user, text) => {
     return {
-        user: name,
+        user: user,
         text: text,
         time: getCurrentDateTime(),
         reply: [],
@@ -11,7 +11,6 @@ const createComment = (name, text) => {
 };
 
 const deleteComment = (comments, index) => {
-    console.log(comments, index);
     if (index.length === 1) return comments.filter((c, i) => i !== index[0]);
     else
         return comments.map((c, i) => {
@@ -31,18 +30,22 @@ const edit = (comments, text, index) => {
     });
 };
 
-const createReply = (c, text) => {
+const createReply = (c, text, user) => {
     return {
         ...c,
-        reply: [...c.reply, createComment("Name", text)],
+        reply: [...c.reply, createComment(user, text)],
     };
 };
 
-const reply = (comments, text, index) => {
+const reply = (comments, text, index, user) => {
     return comments.map((c, i) => {
         if (i === index[0])
-            if (index.length === 1) return createReply(c, text);
-            else return { ...c, reply: reply(c.reply, text, index.slice(1)) };
+            if (index.length === 1) return createReply(c, text, user);
+            else
+                return {
+                    ...c,
+                    reply: reply(c.reply, text, index.slice(1), user),
+                };
         else return c;
     });
 };
@@ -50,13 +53,21 @@ const reply = (comments, text, index) => {
 const reducer = (comments, action) => {
     switch (action.type) {
         case "ADD":
-            return [...comments, createComment("Name", action.payload.text)];
+            return [
+                ...comments,
+                createComment(action.payload.user, action.payload.text),
+            ];
         case "DELETE":
             return deleteComment(comments, action.payload);
         case "EDIT":
             return edit(comments, action.payload.text, action.payload.index);
         case "REPLY":
-            return reply(comments, action.payload.text, action.payload.index);
+            return reply(
+                comments,
+                action.payload.text,
+                action.payload.index,
+                action.payload.user
+            );
         default:
             return comments;
     }
