@@ -10,7 +10,7 @@ const getCurrentUser = ({ users = {} }, userid = "") => {
 
 const initialState = () => {
     return {
-        createUser: getFromLocal("currentUser", {}, (data) => !!data?.userid),
+        currentUser: getFromLocal("currentUser", {}, (data) => !!data?.userid),
         users: getFromLocal("users", [], (data) => data.length),
     };
 };
