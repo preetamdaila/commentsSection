@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from "react";
+import { useSelector } from "react-redux";
 import "./main.css";
 import Comments from "./comments";
 import CommentBox from "./commentBox";
@@ -12,7 +13,9 @@ const Main = () => {
         [],
         (data) => data.length
     );
+
     const [comments, dispatch] = useReducer(reducer, storedComments);
+    const currentUser = useSelector((state) => state.currentUser);
 
     useEffect(() => {
         setStoredComments("comments", comments);

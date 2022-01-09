@@ -55,50 +55,52 @@ const CommentSection = (props) => {
                             />
                         )}
                     </div>
-                    <div className="commentFooter">
-                        <div
-                            className={`footerActions ${
-                                replying ? "cancel" : "replay"
-                            }`}
-                            onClick={() =>
-                                setReplying((preReplying) => !preReplying)
-                            }
-                        >
-                            <div className="footerIcon replayIcon"></div>
-                            <div className="replayText">
-                                {replying ? "Cancel" : "Reply"}
+                    {currentUser?.userid ? (
+                        <div className="commentFooter">
+                            <div
+                                className={`footerActions ${
+                                    replying ? "cancel" : "replay"
+                                }`}
+                                onClick={() =>
+                                    setReplying((preReplying) => !preReplying)
+                                }
+                            >
+                                <div className="footerIcon replayIcon"></div>
+                                <div className="replayText">
+                                    {replying ? "Cancel" : "Reply"}
+                                </div>
                             </div>
-                        </div>
-                        {user.userid === currentUser?.userid ? (
-                            <React.Fragment>
-                                <div
-                                    className="footerActions delete"
-                                    onClick={() => {
-                                        dispatch({
-                                            type: "DELETE",
-                                            payload: index,
-                                        });
-                                    }}
-                                >
-                                    <div className="footerIcon deleteIcon"></div>
-                                    <div className="deleteText">Delete</div>
-                                </div>
-                                <div
-                                    className={`footerActions ${
-                                        edit ? "cancel" : "edit"
-                                    }`}
-                                    onClick={() =>
-                                        setEdit((prevEdit) => !prevEdit)
-                                    }
-                                >
-                                    <div className="footerIcon editIcon"></div>
-                                    <div className="editText">
-                                        {edit ? "Cancel" : "Edit"}
+                            {user.userid === currentUser?.userid ? (
+                                <React.Fragment>
+                                    <div
+                                        className="footerActions delete"
+                                        onClick={() => {
+                                            dispatch({
+                                                type: "DELETE",
+                                                payload: index,
+                                            });
+                                        }}
+                                    >
+                                        <div className="footerIcon deleteIcon"></div>
+                                        <div className="deleteText">Delete</div>
                                     </div>
-                                </div>
-                            </React.Fragment>
-                        ) : null}
-                    </div>
+                                    <div
+                                        className={`footerActions ${
+                                            edit ? "cancel" : "edit"
+                                        }`}
+                                        onClick={() =>
+                                            setEdit((prevEdit) => !prevEdit)
+                                        }
+                                    >
+                                        <div className="footerIcon editIcon"></div>
+                                        <div className="editText">
+                                            {edit ? "Cancel" : "Edit"}
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            ) : null}
+                        </div>
+                    ) : null}
                 </div>
                 {replying && (
                     <div className="newReply">

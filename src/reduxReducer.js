@@ -3,7 +3,7 @@ import { getFromLocal, setInLocal } from "./localStorageHelper";
 
 const getCurrentUser = ({ users = {} }, userid = "") => {
     if (users.length > 0) {
-        let current = users.filter((user) => userid == user.userid);
+        let current = users.filter((user) => userid === user.userid);
         return current.length ? current[0] : {};
     } else return {};
 };

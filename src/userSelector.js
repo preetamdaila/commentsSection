@@ -1,65 +1,58 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addUser, changeUser } from "./reduxActions";
+import { changeUser } from "./reduxActions";
 import "./userSelector.css";
+import CreateNewUser from "./createNewUser";
 
 const UserSelector = () => {
-    const [inputText, setInputText] = useState("");
     const users = useSelector((state) => state.users);
     const currentUser = useSelector((state) => state.currentUser);
     const dispatch = useDispatch();
 
-    const changeInput = (e) => {
-        setInputText(e.target.value);
-    };
-
     return (
         <div className="userSection">
-            <div>
-                <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        dispatch(addUser(inputText.trim()));
-                        setInputText("");
-                    }}
-                >
-                    <input
-                        type="text"
-                        onChange={(e) => changeInput(e)}
-                        value={inputText}
-                    />
-                    <div>Current text: {inputText} </div>
-                    <div>Current user is : {currentUser?.username}</div>
-                </form>
+            <CreateNewUser />
+            <div className="availableUsers">
                 {users?.length ? (
-                    <div className="usersList">
-                        {users.map((user, i) => (
-                            <div
-                                className={`user ${
-                                    currentUser?.userid === user.userid
-                                        ? "selectedUser"
-                                        : ""
-                                }`}
-                                onClick={() => {
-                                    if (
-                                        !currentUser?.userid ||
-                                        currentUser?.userid !== user.userid
-                                    )
-                                        dispatch(changeUser(user.userid));
-                                }}
-                                key={user.userid}
-                            >
+                    <React.Fragment>
+                        <div className="usersList">
+                            {users.map((user, i) => (
                                 <div
-                                    className="userColor"
-                                    style={{ backgroundColor: user.bgColor }}
-                                ></div>
-                                <div className="username" key={user.userid}>
-                                    {user.username}
+                                    className={`user ${
+                                        currentUser?.userid === user.userid
+                                            ? "selectedUser"
+                                            : ""
+                                    }`}
+                                    onClick={() => {
+                                        if (
+                                            !currentUser?.userid ||
+                                            currentUser?.userid !== user.userid
+                                        )
+                                            dispatch(changeUser(user.userid));
+                                    }}
+                                    key={user.userid}
+                                >
+                                    <div
+                                        className="userColor"
+                                        style={{
+                                            backgroundColor: user.bgColor,
+                                        }}
+                                    ></div>
+                                    <div className="username" key={user.userid}>
+                                        {user.username}
+                                    </div>
                                 </div>
+                            ))}
+                        </div>
+                        {currentUser?.userid ? null : (
+                            <div className="noUserSelected">
+                                No user selected
                             </div>
-                        ))}
-                    </div>
-                ) : null}
+                        )}
+                    </React.Fragment>
+                ) : (
+                    <div className="noUserAvailable">No user available.</div>
+                )}
             </div>
         </div>
     );

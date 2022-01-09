@@ -12,7 +12,7 @@ const CommentBox = React.forwardRef((props, ref) => {
 
     useEffect(() => {
         if (ref) ref.current.focus();
-    }, [props]);
+    }, [props, ref]);
 
     return (
         <form
@@ -37,6 +37,14 @@ const CommentBox = React.forwardRef((props, ref) => {
                 type="text"
                 value={inputText}
                 onChange={(e) => changeInput(e)}
+                placeholder={`${
+                    action.type === "REPLY"
+                        ? "Reply here"
+                        : action.type === "EDIT"
+                        ? "Edit your comment"
+                        : "Comment here"
+                }`}
+                disabled={currentUser?.userid ? false : "disabled"}
             />
         </form>
     );
