@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import CommentBox from "./commentBox";
+import { useSelector } from "react-redux";
 
 const CommentSection = (props) => {
     const {
@@ -10,6 +11,7 @@ const CommentSection = (props) => {
     const [edit, setEdit] = useState(false);
     const [replying, setReplying] = useState(false);
     const inputRef = useRef();
+    const currentUser = useSelector((state) => state.currentUser);
 
     return (
         <div className="comments" key={"comment-" + index}>

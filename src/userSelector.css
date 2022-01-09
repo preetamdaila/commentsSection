@@ -1,0 +1,38 @@
+.usersList {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    margin: 0.5rem 0.25rem;
+}
+
+.user {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid transparent;
+    color: #855;
+}
+
+.userColor {
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid white;
+}
+
+.username {
+    font-weight: 500;
+}
+
+.user:hover {
+    border: 1px solid skyblue;
+}
+
+.user.selectedUser {
+    background-color: skyblue;
+    color: white;
+}

@@ -2,9 +2,9 @@ import createUser from "./createUser";
 import { getFromLocal, setInLocal } from "./localStorageHelper";
 
 const getCurrentUser = ({ users = {} }, userid = "") => {
-    console.log(users, userid);
     if (users.length > 0) {
-        return { ...users.filter((user) => userid == user.userid) };
+        let current = users.filter((user) => userid == user.userid);
+        return current.length ? current[0] : {};
     } else return {};
 };
 

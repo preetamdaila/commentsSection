@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { addUser, changeUser } from "./reduxActions";
+import "./userSelector.css";
 
 const UserSelector = () => {
     const [inputText, setInputText] = useState("");
@@ -14,15 +16,12 @@ const UserSelector = () => {
     console.log(currentUser);
 
     return (
-        <div>
+        <div className="userSection">
             <div>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        dispatch({
-                            type: "ADD_USER",
-                            payload: { username: inputText },
-                        });
+                        dispatch(addUser(inputText.trim()));
                         setInputText("");
                     }}
                 >
@@ -35,28 +34,33 @@ const UserSelector = () => {
                     <div>Current user is : {currentUser?.username}</div>
                 </form>
                 {users?.length ? (
-                    <select
-                        defaultValue={currentUser?.userid || 0}
-                        onChange={(e) => {
-                            if (e !== currentUser?.userid) {
-                                dispatch({
-                                    type: "CHANGE_USER",
-                                    payload: { userid: e.target.value },
-                                });
-                            }
-                        }}
-                    >
-                        {currentUser?.userid ? (
-                            <option value="0" key={"0"}>
-                                Select
-                            </option>
-                        ) : null}
+                    <div className="usersList">
                         {users.map((user, i) => (
-                            <option value={user.userid} key={user.userid}>
-                                {user.username}
-                            </option>
+                            <div
+                                className={`user ${
+                                    currentUser?.userid === user.userid
+                                        ? "selectedUser"
+                                        : ""
+                                }`}
+                                onClick={() => {
+                                    if (
+                                        !currentUser?.userid ||
+                                        currentUser?.userid !== user.userid
+                                    )
+                                        dispatch(changeUser(user.userid));
+                                }}
+                                key={user.userid}
+                            >
+                                <div
+                                    className="userColor"
+                                    style={{ backgroundColor: user.bgColor }}
+                                ></div>
+                                <div className="username" key={user.userid}>
+                                    {user.username}
+                                </div>
+                            </div>
                         ))}
-                    </select>
+                    </div>
                 ) : null}
             </div>
         </div>
