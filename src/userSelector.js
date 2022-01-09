@@ -13,8 +13,6 @@ const UserSelector = () => {
         setInputText(e.target.value);
     };
 
-    console.log(currentUser);
-
     return (
         <div className="userSection">
             <div>

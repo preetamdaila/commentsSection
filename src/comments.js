@@ -4,7 +4,7 @@ import CommentSection from "./commentSection";
 const Comments = (props) => {
     const { comments, dispatch } = props;
     return (
-        <div className="commentsContainer">
+        <div className="comments">
             {comments.map((comment, index) => (
                 <CommentSection
                     comment={comment}
